@@ -1,8 +1,19 @@
 require 'time'
 
 def average_time_of_day(times)
-	times_in_sec = times.map { |t|
-		Time.parse(t).to_f
+
+	times_in_time = times.map { |t| 
+		Time.parse(t)
+	}
+	if(times_in_time.first.hour >= 12) then
+
+		times_in_time = times_in_time.map { |t|
+			(t.hour < 12 ? t+60*60*24 : t)
+		}
+	end
+
+	times_in_sec = times_in_time.map { |t|
+		t.to_f
 	}
 	min = times_in_sec.min
 

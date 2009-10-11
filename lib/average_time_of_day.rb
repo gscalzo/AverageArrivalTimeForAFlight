@@ -5,8 +5,22 @@ def average_time_of_day(times)
 	times_in_time = times.map { |t| 
 		Time.parse(t)
 	}
-	if(times_in_time.first.hour >= 12) then
+	times_am = times_in_time.select { |t|
+		t.hour < 12
+	}
 
+	avg_am = times_am.map { |t|
+		t.to_f
+	}.inject(0.0){|sum,el| sum + el}/times_am.size
+
+	times_pm = times_in_time.select { |t|
+		t.hour >= 12
+	}
+	avg_pm = times_pm.map { |t|
+		t.to_f
+	}.inject(0.0){|sum,el| sum + el}/times_pm.size
+
+	if(avg_pm - avg_am  >= 12*3600) then
 		times_in_time = times_in_time.map { |t|
 			(t.hour < 12 ? t+60*60*24 : t)
 		}

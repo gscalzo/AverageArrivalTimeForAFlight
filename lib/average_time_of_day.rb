@@ -7,7 +7,8 @@ class Array
 	end
 
 	def avg
-		to_sec.inject(0.0){|sum,el| sum + el}/size
+		(size > 0) ? to_sec.inject(0.0){|sum,el| sum + el}/size : 0
+
 	end
 end
 

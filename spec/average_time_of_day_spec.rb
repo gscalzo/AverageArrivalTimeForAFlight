@@ -28,6 +28,13 @@ describe 'average_time_of_day' do
 		end
 	end
 
+	context 'for "11:59pm" and "12:01am' do
+		it 'should be "12:00am"' do
+			avg = average_time_of_day(["11:59pm", "00:01am"])
+			avg.should == "12:00am"
+		end
+	end
+
 	context 'for "11:51pm", "11:56pm", "12:01am", "12:06am" and  "12:11am"' do
 		it 'should be "12:01am"' do
 			avg = average_time_of_day(["11:51pm", "11:56pm", "12:01am", "12:06am", "12:11am"])
